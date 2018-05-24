@@ -11,6 +11,32 @@ import {
   Text,
   View
 } from 'react-native';
+import ApolloClient from 'apollo-boost'
+import gql from "graphql-tag";
+
+import config from "./config";
+
+const client = new ApolloClient({
+  uri: config.graphqlEndpoint
+})
+debugger;
+client
+  .query({
+    query: gql`
+    {
+      posts{
+        title
+      }
+    }
+    `
+  })
+  .then(result => {
+    debugger;
+    console.log('!!!',result)
+  })
+  .catch(e=>{
+    console.error('!!!error: ',e)
+  })
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
