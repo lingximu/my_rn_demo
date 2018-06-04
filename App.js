@@ -13,13 +13,14 @@ import {
 } from 'react-native';
 import ApolloClient from 'apollo-boost'
 import gql from "graphql-tag";
+import { ApolloProvider,Query } from "react-apollo";
 
 import config from "./config";
 
 const client = new ApolloClient({
   uri: config.graphqlEndpoint
 })
-debugger;
+
 client
   .query({
     query: gql`
@@ -31,7 +32,6 @@ client
     `
   })
   .then(result => {
-    debugger;
     console.log('!!!',result)
   })
   .catch(e=>{
@@ -45,20 +45,41 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const PostTitles = () => (
+  <Query
+    query={gql`
+      {
+      posts{
+        title
+      }
+    }
+    `}
+  >
+    {({ loading, error, data }) => {
+      console.log('PostTitles组件：',loading,error,data)
+      if (loading) return <Text>Loading...</Text>;
+      if (error) return <Text>Error :(</Text>;
+
+      return data.posts.map(({ title,id }) => (
+        <View key={title}>
+          <Text>
+          {title}
+          </Text>
+        </View>
+      ));
+    }}
+  </Query>
+);
+
 export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <ApolloProvider client={client}>
+        <View style={styles.container}>
+          <Text>post内容</Text>
+          <PostTitles></PostTitles>
+        </View>
+      </ApolloProvider>
     );
   }
 }

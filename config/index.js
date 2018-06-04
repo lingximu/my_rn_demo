@@ -1,5 +1,5 @@
 const config = {
-    graphqlEndpoint:"http://localhost:9006/graphql"
+    graphqlEndpoint:"http://localhost:8000/graphql"
 }
 
 export default config;
