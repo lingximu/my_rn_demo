@@ -31,7 +31,7 @@ export default class App extends Component {
     return (
       <Provider {...store}>
         <ApolloProvider client={client}>
-          <DetailScreen />
+          <TabNavigator />
         </ApolloProvider>
       </Provider>
     );
