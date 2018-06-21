@@ -1,0 +1,17 @@
+{
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "cSpell.words": [
+        "Ionicons"
+    ],
+    "javascript.validate.enable": false,
+    "standard.enable": false,
+    "standard.run": "onType",
+    "standard.autoFixOnSave": true,
+    "standard.semistandard": true,
+    "standard.options": {
+        "ignore": [
+            "node_modules/**"
+        ],
+        "parser": "babel-eslint",
+    }
+}

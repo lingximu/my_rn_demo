@@ -1,12 +1,6 @@
 
 # Created by https://www.gitignore.io/api/node,code,macos,reactnative
 
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
 
 ### macOS ###
 *.DS_Store
