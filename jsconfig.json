@@ -1,0 +1,13 @@
+{
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "baseUrl": "./",
+        "target": "esnext",
+        "paths": {
+            "@shared/*": ["./src/shared/*"]
+        }
+    },
+    "checkJs":true,
+    "experimentalDecorators":true
+
+}
