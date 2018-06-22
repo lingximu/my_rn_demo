@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from 'react-navigation';
-// import { HomeStack, SettingsStack } from './stacks';
+import { HomeStack, SettingsStack } from './stacks';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { DetailScreen, HomeScreen, SettingScreen } from '../screen';
 
@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 
 export default createBottomTabNavigator({
-  Home: HomeScreen,
-  Settings: SettingScreen
-},{
+  Home: HomeStack,
+  Settings: SettingsStack
+}, {
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;

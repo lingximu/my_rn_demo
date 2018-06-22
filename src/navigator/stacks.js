@@ -1,10 +1,11 @@
 
-import { DetailScreen, HomeScreen, SettingScreen } from '../screen';
+import { DetailScreen, HomeScreen, SettingScreen, ModalScreen } from '../screen/index';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 export const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Details: DetailScreen
+  Details: DetailScreen,
+  Modal: ModalScreen
 });
 
 export const SettingsStack = createStackNavigator({
