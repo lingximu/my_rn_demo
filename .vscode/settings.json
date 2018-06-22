@@ -4,7 +4,7 @@
         "Ionicons"
     ],
     "javascript.validate.enable": false,
-    "standard.enable": false,
+    "standard.enable": true,
     "standard.run": "onType",
     "standard.autoFixOnSave": true,
     "standard.semistandard": true,
