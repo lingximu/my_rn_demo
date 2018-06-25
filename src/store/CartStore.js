@@ -1,7 +1,7 @@
 import {observable, computed, reaction} from 'mobx';
 
-export default class GoodsStore {
-    @observable todos = [];
+export default class CartStore {
+    @observable fruits = [];
 
     subscribeServerToStore () {
       reaction(

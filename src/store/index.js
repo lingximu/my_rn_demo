@@ -1,7 +1,7 @@
 
 import { observable, computed, action } from 'mobx';
-import GoodsStore from './GoodsStore';
+import CartStore from './CartStore';
 
 export default {
-  goodsStore: new GoodsStore()
+  artStore: new CartStore()
 };

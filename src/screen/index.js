@@ -1,11 +1,19 @@
-import DetailScreen from './Detail';
 import HomeScreen from './Home';
+import CategoryScreen from './Category';
+import CartScreen from './Cart';
+import MineScreen from './Mine';
 import SettingScreen from './Setting';
 import ModalScreen from './Modal';
+import ItemDetailScreen from './ItemDetail';
+import OrderScreen from './Order';
 
 export {
-  DetailScreen,
   HomeScreen,
+  CategoryScreen,
+  CartScreen,
+  MineScreen,
   SettingScreen,
-  ModalScreen
+  ModalScreen,
+  ItemDetailScreen,
+  OrderScreen
 };
