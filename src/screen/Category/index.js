@@ -7,7 +7,8 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import FruitItems from '../../compose/FruitItems';
 const ScrollableTabView = require('react-native-scrollable-tab-view');
-
+import Title from '../../component/Title';
+import theme from '../../config/theme';
 export default class CategoryScreen extends React.Component {
   render () {
     return (
@@ -36,7 +37,11 @@ export default class CategoryScreen extends React.Component {
           const items = data.categories.map(({ name, id, fruits }) => (
             <FruitItems key={id} tabLabel={name} items={fruits} navigation={this.props.navigation} />
           ));
-          return <ScrollableTabView>
+          return <ScrollableTabView style={styles.container}
+            tabBarTextStyle={styles.tabBarText}
+            tabBarUnderlineStyle={styles.tabBarUnderline}
+            initialPage={0}
+          >
             {items}
           </ScrollableTabView>;
         }}
@@ -44,3 +49,17 @@ export default class CategoryScreen extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  tabBarTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center'
+  },
+  tabBarUnderlineStyle: {
+    backgroundColor: theme.color
+  }
+});

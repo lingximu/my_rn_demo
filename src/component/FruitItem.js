@@ -5,7 +5,7 @@ import theme from '../config/theme';
 const {width} = Dimensions.get('window');
 
 const FruitItem = ({onPress, imageUrl, name, price}) => {
-  return <TouchableOpacity onPress={() => onPress && onPress()}>
+  return <TouchableOpacity onPress={() => onPress && onPress()} >
     <View style={styles.container}>
       <Image source={{
         uri: imageUrl
@@ -18,8 +18,8 @@ const FruitItem = ({onPress, imageUrl, name, price}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
     alignItems: 'center',
+    flexWrap: 'wrap',
 
     width: (width - 40) / 2,
     height: 150,
