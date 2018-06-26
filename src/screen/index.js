@@ -1,5 +1,5 @@
 import HomeScreen from './Home';
-import CategoryScreen from './Category';
+import CategoryScreen from './Category/index';
 import CartScreen from './Cart';
 import MineScreen from './Mine';
 import SettingScreen from './Setting';

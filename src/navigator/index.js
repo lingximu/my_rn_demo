@@ -76,7 +76,8 @@ const Tab = createBottomTabNavigator({
   tabBarOptions: {
     activeTintColor: 'tomato',
     inactiveTintColor: 'gray'
-  }
+  },
+  initialRouteName: 'Category'
 });
 
 export default createStackNavigator({
