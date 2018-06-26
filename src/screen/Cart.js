@@ -13,6 +13,7 @@ export default class CartScreen extends React.Component {
           {
             cart(id:1){
               fruits{
+                id
                 name
                 price
                 image{
@@ -30,8 +31,8 @@ export default class CartScreen extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <Text>loading</Text>;
           if (error) return <Text>error: {error.message}</Text>;
-          const items = data.cart.fruits.map(({name, price, image, category}) => {
-            return <Text>
+          const items = data.cart.fruits.map(({id, name, price, image, category}) => {
+            return <Text key={id}>
               {name} > {price} 元 > image: {image.url}
             </Text>;
           });

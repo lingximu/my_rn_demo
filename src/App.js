@@ -10,13 +10,15 @@ import {
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider, Query } from 'react-apollo';
 import { onError, Provider } from 'mobx-react';
-
+import { YellowBox } from 'react-native';
 import store from './store';
 import config from './config';
 import TabNavigator from './navigator';
 
 import { DetailScreen, HomeScreen, SettingScreen } from './screen';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'VirtualizedList: missing keys for items']);
 
 onError(error => {
   console.error(error);
