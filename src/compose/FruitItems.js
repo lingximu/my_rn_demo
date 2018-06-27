@@ -32,7 +32,7 @@ const FruitItems = ({items = [], navigation}) => {
   if (two.length !== 0) { twoItemArr.push(two); }
 
   return <View style={styles.box}>
-    <Title text='精品推荐' />
+    <Title text='精品瓜果' />
     <FlatList
       data={twoItemArr}
       renderItem={({item: two}) => {
