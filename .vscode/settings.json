@@ -1,8 +1,9 @@
 {
     "javascript.implicitProjectConfig.experimentalDecorators": true,
     "cSpell.words": [
-        "Ionicons",
-        "Scrollable"
+      "Ionicons",
+      "Scrollable",
+      "Swiper"
     ],
     "javascript.validate.enable": false,
     "standard.enable": true,
