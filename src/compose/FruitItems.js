@@ -6,10 +6,10 @@ import { View, StyleSheet, Text, FlatList } from 'react-native';
 const FruitTwoItems = ({twoItems = [], navigation}) => {
   return <View style={{flex: 1, flexWrap: 'nowrap', flexDirection: 'row'}}>
     {
-      twoItems.map(({name, price, id, image: {url}}) => {
-        const obj = arguments[0];
+      twoItems.map((item) => {
+        const {name, price, id, image: {url}} = item;
         return <FruitItem
-          onPress={() => navigation.navigate('ItemDetail', obj)}
+          onPress={() => navigation.navigate('ItemDetail', item)}
           name={name} price={price} imageUrl={url} key={id}
         />;
       })
@@ -32,7 +32,7 @@ const FruitItems = ({items = [], navigation}) => {
   if (two.length !== 0) { twoItemArr.push(two); }
 
   return <View style={styles.box}>
-    <Title text='精品瓜果' />
+    {/* <Title text='精品瓜果' /> */}
     <FlatList
       data={twoItemArr}
       renderItem={({item: two}) => {
