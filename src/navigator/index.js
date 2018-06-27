@@ -82,7 +82,13 @@ const Tab = createBottomTabNavigator({
 
 export default createStackNavigator({
   Tab: {screen: Tab},
-  ItemDetail: {screen: ModalScreen},
+  ItemDetail: {
+    screen: ModalScreen,
+    navigationOptions: () => ({
+      title: `商品信息`,
+      headerBackTitle: null
+    })
+  },
   Cart: {screen: CartScreen},
   OrderScreen: {screen: ModalScreen}
 },
