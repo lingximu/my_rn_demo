@@ -35,7 +35,10 @@ export default class CategoryScreen extends React.Component {
           if (loading) return <Text>Loading...</Text>;
           if (error) return <Text>Error :(error.message)</Text>;
           const items = data.categories.map(({ name, id, fruits }) => (
-            <FruitItems key={id} tabLabel={name} items={fruits} navigation={this.props.navigation} />
+            <View key={id} tabLabel={name} style={{flex: 1}}>
+              <Title text={'精品' + name} />
+              <FruitItems items={fruits} navigation={this.props.navigation} />
+            </View>
           ));
           return <ScrollableTabView style={styles.container}
             tabBarTextStyle={styles.tabBarText}
