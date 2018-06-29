@@ -1,7 +1,7 @@
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { HomeScreen, CategoryScreen, CartScreen,
-  MineScreen, ModalScreen } from '../screen/index';
+  MineScreen, ModalScreen, ItemDetailScreen } from '../screen/index';
 import TabBarItem from '../component/TabBarItem';
 import React, { Component } from 'react';
 import {
@@ -83,7 +83,7 @@ const Tab = createBottomTabNavigator({
 export default createStackNavigator({
   Tab: {screen: Tab},
   ItemDetail: {
-    screen: ModalScreen,
+    screen: ItemDetailScreen,
     navigationOptions: () => ({
       title: `商品信息`,
       headerBackTitle: null

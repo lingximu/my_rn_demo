@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import {
   Platform, StyleSheet, Text, View, Button, Image
 } from 'react-native';
+import FitImage from 'react-native-fit-image';
 
 export default class ItemDetail extends React.Component {
   render () {
     const fruit = this.props.navigation.state.params;
     const {id, price, name, image: {url}, count} = fruit;
     return (
-      <View key={id} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Image source={{uri: url}} />
+      <View key={id} style={styles.container}>
+        <FitImage source={{uri: url}} />
         <View>
           <Text>数量{0}</Text>
           <Text>+</Text>
@@ -25,3 +26,8 @@ export default class ItemDetail extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1 }
+})
+;
