@@ -1,45 +1,45 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import {
   Platform, StyleSheet, Text, View, Button
 } from 'react-native';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
+@inject('cartStore')
+@observer
 export default class CartScreen extends React.Component {
   render () {
+    const {fruits: cartFruits} = this.props.cartStore;
+
     return (
       <Query
         query={gql`
           {
-            cart(id:1){
-              fruits{
-                id
-                name
-                price
-                image{
-                  url
-                }
-                category{
-                  id
-                  name
-                }
+            fruits{
+              id
+              name
+              price
+              image{
+                url
               }
+              count
             }
           }
         `}
       >
-        {({ loading, error, data }) => {
+        {({loading, error, data}) => {
           if (loading) return <Text>loading</Text>;
           if (error) return <Text>error: {error.message}</Text>;
-          const items = data.cart.fruits.map(({id, name, price, image, category}) => {
-            return <Text key={id}>
-              {name} > {price} 元 > image: {image.url}
-            </Text>;
-          });
-          return <View>
-            <Text>购物车所有的物品如下</Text>
-            {items}
-          </View>;
+          const fruits = data.fruits;
+          if (cartFruits.length === 0) {
+            return <Text>购物车为空！赶快去添加商品吧！</Text>;
+          } else {
+            return cartFruits.map(({id, count}, index) => {
+              const f = fruits.find(f => f.id === id);
+              return <Text key={f.id}> 第{index}个；{JSON.stringify(f)}</Text>;
+            });
+          }
         }}
       </Query>
     );

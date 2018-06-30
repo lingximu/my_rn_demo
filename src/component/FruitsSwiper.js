@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 export default class FruitsSwiper extends Component {
   render () {
     const {images, navigation} = this.props;
-    debugger; /* eslint-disable-line */
     return (<Swiper showsButtons>
       {
         images.map((img) => {

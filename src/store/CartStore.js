@@ -1,7 +1,14 @@
-import {observable, computed, reaction} from 'mobx';
+import {observable, computed, reaction, trace, autorun} from 'mobx';
 
 export default class CartStore {
-    @observable fruits = [];
+    @observable fruits = [{id: 1, count: 5}]; // id / 数量
+
+    subscribeLogger () {
+      autorun(() => {
+        console.log('fruits.length: ', this.fruits.length);
+        console.log('fruits: ', this.fruits);
+      });
+    }
 
     subscribeServerToStore () {
       reaction(

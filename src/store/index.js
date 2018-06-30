@@ -1,7 +1,10 @@
 
-import { observable, computed, action } from 'mobx';
 import CartStore from './CartStore';
 
+const cartStore = new CartStore();
+cartStore.subscribeLogger();
+window.cartStore = cartStore;
+
 export default {
-  artStore: new CartStore()
+  cartStore
 };

@@ -3,7 +3,10 @@ import {
   Platform, StyleSheet, Text, View, Button, Image
 } from 'react-native';
 import FitImage from 'react-native-fit-image';
+import { inject, observer } from 'mobx-react/native';
 
+@inject('cartStore')
+@observer
 export default class ItemDetail extends React.Component {
   render () {
     const fruit = this.props.navigation.state.params;
