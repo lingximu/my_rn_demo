@@ -3,7 +3,8 @@
     "cSpell.words": [
       "Ionicons",
       "Scrollable",
-      "Swiper"
+      "Swiper",
+      "autorun"
     ],
     "javascript.validate.enable": false,
     "standard.enable": true,
