@@ -55,20 +55,20 @@ class Item extends Component {
         <Image source={{uri: url}} style={styles.middleImage} />
         <View style={styles.rightBox}>
           <View style={styles.intro}>
-            <Text>{name}</Text>
-            <Text>￥ {price}/500g</Text>
+            <Text style={styles.text}>{name}</Text>
+            <Text style={styles.text}>￥ {price}/500g</Text>
           </View>
           <View style={styles.bottomTextBox}>
             <TouchableOpacity onPress={this.increase(id)}>
-              <Text>+</Text>
+              <Text style={styles.text}>+</Text>
             </TouchableOpacity>
-            <Text>{count}</Text>
+            <Text style={styles.text}>{count}</Text>
             <TouchableOpacity onPress={this.decrease(id)}>
-              <Text>-</Text>
+              <Text style={styles.text}>-</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={this.delete(id)}>
-              <Text>删</Text>
+              <Text style={styles.text}>删</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -84,7 +84,7 @@ export default class Cart extends React.Component {
     const {fruits: allFruits, cartStore: {fruits: cartFruits}} = this.props;
     let items;
     if (cartFruits.length === 0) {
-      items = <Text>购物车为空！赶快去添加商品吧！</Text>;
+      items = <Text style={styles.empty}>购物车为空！赶快去添加商品吧！</Text>;
     } else {
       items = cartFruits.map(({id, count, selected}) => {
         const f = allFruits.find(f => f.id === id);
@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
   },
   middleImage: {
     height: 130,
-    width: 130
+    width: 130,
+    borderRadius: 65
   },
   rightBox: {
     flex: 1,
@@ -144,5 +145,13 @@ const styles = StyleSheet.create({
   bottomTextBox: {
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  text: {
+    paddingLeft: 5,
+    paddingRight: 5
+  },
+  empty: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

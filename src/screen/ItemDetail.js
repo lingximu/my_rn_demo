@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Platform, StyleSheet, Text, View, Button, Image, TouchableOpacity
+  Platform, StyleSheet, Text, View, Button, Image, TouchableOpacity, Dimensions
 } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { inject, observer } from 'mobx-react/native';
-
+const {height, width} = Dimensions.get('window');
+const emptyCartImg = require('../img/cart.png');
+const existCartImg = require('../img/cart2.png');
 @inject('cartStore')
 @observer
 export default class ItemDetail extends React.Component {
@@ -34,47 +36,120 @@ export default class ItemDetail extends React.Component {
     const fruit = this.props.navigation.state.params;
     const {id, price, name, image: {url}, count} = fruit;
     const addCart = (() => {
-      if (this.state.num === 0) { return <Text style={styles.disable}>加入购物车</Text>; } else {
+      if (this.state.num === 0) { return <Text style={[styles.disable]}>加入购物车</Text>; } else {
         return (
           <TouchableOpacity>
-            <Text onPress={this.handleAddToCart}>加入购物车</Text>
+            <Text style={styles.text} onPress={this.handleAddToCart}>加入购物车</Text>
           </TouchableOpacity>
         );
       }
     })();
-    console.log('render', this.state.num);
+
     return (
       <View key={id} style={styles.container}>
-        <FitImage source={{uri: url}} />
-        <View>
-          <Text>数量{this.state.num}</Text>
+        <View style={styles.imaWrapper}>
+          <Image style={styles.image} source={{uri: url}} />
+        </View>
+        <View style={styles.operation}>
+          <Text style={styles.text}>数量  {this.state.num}</Text>
           <TouchableOpacity>
-            <Text style={styles.titleText} onPress={this.handleNumAdd}>+</Text>
+            <Text style={styles.text} onPress={this.handleNumAdd}>+</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.titleText} onPress={this.handleNumSubtract}>-</Text>
+            <Text style={styles.text} onPress={this.handleNumSubtract}>-</Text>
           </TouchableOpacity>
           {addCart}
         </View>
-        <View>
-          <Text>{count ? '有货' : '无货'}</Text>
-          <Text>{name}</Text>
-          <Text>￥{price}/500g</Text>
+        <View style={styles.message}>
+          <View style={styles.block}>
+            <Text>{count ? '有货' : '无货'}</Text>
+          </View>
+          <View style={styles.block}>
+            <Text>{name}</Text>
+          </View>
+          <View style={styles.block}>
+            <Text>￥{price}/500g</Text>
+          </View>
         </View>
-        <Text onPress={() => this.props.navigation.navigate('CartModel')} >查看购物车</Text>
+        <TouchableOpacity style={styles.cartImageWrapper} onPress={() => this.props.navigation.navigate('CartModel')}>
+          <Image style={styles.cartImage} source={existCartImg} />
+          <View style={styles.textIcon}>
+            <Text style={styles.textIconInner}>{this.props.cartStore.fruits.length}</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    flex: 1
+  },
+  imaWrapper: {
+    paddingTop: 30,
+    paddingBottom: 40,
+    width,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  image: {
+    height: 160,
+    width: 160,
+    borderRadius: 80
+  },
+  operation: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: 70,
+    width: width - 25,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 40,
+    backgroundColor: '#ab956e'
+  },
+  message: {
+    marginTop: 10
+  },
+  block: {
+    alignItems: 'center',
+    marginTop: 3,
+    marginBottom: 3
+  },
   titleText: {
     fontSize: 20,
     fontWeight: 'bold'
   },
+  text: {
+    color: 'white'
+  },
   disable: {
     color: '#ccc'
+  },
+  cartImageWrapper: {
+    position: 'absolute',
+    right: 20,
+    top: 20
+  },
+  cartImage: {
+    width: 50,
+    height: 50
+  },
+  textIcon: {
+    position: 'absolute',
+    right: 12,
+    top: 20,
+    borderRadius: 10,
+    width: 20,
+    height: 20
+  },
+  textIconInner: {
+    color: 'green'
   }
 })
 ;
