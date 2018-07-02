@@ -89,7 +89,7 @@ export default createStackNavigator({
       headerBackTitle: null
     })
   },
-  Cart: {screen: CartScreen},
+  CartModel: {screen: CartScreen},
   OrderScreen: {screen: ModalScreen}
 },
 {

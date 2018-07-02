@@ -56,6 +56,7 @@ export default class ItemDetail extends React.Component {
           <Text>{name}</Text>
           <Text>￥{price}/500g</Text>
         </View>
+        <Text onPress={() => this.props.navigation.navigate('CartModel')} >查看购物车</Text>
       </View>
     );
   }
