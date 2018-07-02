@@ -6,6 +6,7 @@ import {
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import FitImage from 'react-native-fit-image';
+import Bottom from './Bottom';
 const radioSelected = require('../../img/radio_selected.png');
 const radioNormal = require('../../img/radio_normal.png');
 
@@ -91,13 +92,30 @@ export default class Cart extends React.Component {
       });
     }
     return (
-      <View>{items}</View>
+      <View style={styles.root}>
+        <View style={styles.items}>
+          {items}
+        </View>
+        <Bottom style={styles.bottom} />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  root: {
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  items: {
+
+  },
+  bottom: {
+    alignSelf: 'flex-end'
+  },
   container: {
+    marginTop: 3,
     flexDirection: 'row',
     alignItems: 'center',
     height: 130

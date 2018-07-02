@@ -1,5 +1,34 @@
 import {observable, computed, reaction, trace, autorun, action } from 'mobx';
+import gql from 'graphql-tag';
+import ApolloClient from 'apollo-boost';
+import config from '../config';
 const assert = require('assert');
+
+const client = new ApolloClient({
+  uri: config.graphqlEndpoint
+});
+let manifestFruits = [];
+
+client
+  .query({
+    query: gql`
+    {
+      fruits{
+        id
+        price
+        name
+      }
+    }
+    `
+  })
+  .then(result => {
+    console.log('manifestFruits result', result.data.fruits);
+    manifestFruits = result.data.fruits;
+  })
+  .catch(e => {
+    console.error('!!!error: ', e);
+  });
+
 export default class CartStore {
     @observable fruits = [{id: 1, count: 5, selected: false}]; // id / 数量
 
@@ -8,6 +37,32 @@ export default class CartStore {
         console.log('fruits.length: ', this.fruits.length);
         console.log('fruits: ', this.fruits);
       });
+    }
+
+    @action
+    toggleAllSelect () {
+      if (this.allSelected) {
+        this.fruits.forEach(f => {
+          f.selected = false;
+        });
+      } else {
+        this.fruits.forEach(f => {
+          f.selected = true;
+        });
+      }
+    }
+
+    @computed get totalMoney () {
+      let total = 0;
+      this.fruits.forEach(({id, count}) => {
+        const {price} = manifestFruits.find(mf => mf.id === id);
+        total += price * count;
+      });
+      return total;
+    }
+
+    @computed get allSelected () {
+      return this.fruits.every(f => f.selected);
     }
 
     @action
