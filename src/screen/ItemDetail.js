@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Platform, StyleSheet, Text, View, Button, Image
+  Platform, StyleSheet, Text, View, Button, Image, TouchableOpacity
 } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { inject, observer } from 'mobx-react/native';
@@ -13,20 +13,13 @@ export default class ItemDetail extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleNumAdd = this.handleNumAdd.bind(this);
     this.handleNumSubtract = this.handleNumSubtract.bind(this);
-    this.state = {num: 1};
+    this.state = {num: 0};
   }
   handleAddToCart () {
-    console.log('trigger handleAddToCart');
     const {id} = this.props.navigation.state.params;
-    const exist = this.props.cartStore.fruits.find(f => f.id === id);
-    if (exist) {
-      console.log('exist: ', exist);
-      exist.count = exist.count + this.state.num;
-    } else {
-      this.props.cartStore.fruits.push({
-        id, count: this.state.num
-      });
-    }
+    this.props.cartStore.addFruit({
+      id, count: this.state.num
+    });
   }
   handleNumAdd () {
     this.setState({
@@ -34,22 +27,34 @@ export default class ItemDetail extends React.Component {
     });
   }
   handleNumSubtract () {
-    console.log('触发 handleNumSubtract');
     const last = this.state.num - 1;
     if (last < 0) { this.setState({num: 0}); } else { this.setState({num: last}); }
   }
   render () {
     const fruit = this.props.navigation.state.params;
     const {id, price, name, image: {url}, count} = fruit;
+    const addCart = (() => {
+      if (this.state.num === 0) { return <Text style={styles.disable}>加入购物车</Text>; } else {
+        return (
+          <TouchableOpacity>
+            <Text onPress={this.handleAddToCart}>加入购物车</Text>
+          </TouchableOpacity>
+        );
+      }
+    })();
     console.log('render', this.state.num);
     return (
       <View key={id} style={styles.container}>
         <FitImage source={{uri: url}} />
         <View>
           <Text>数量{this.state.num}</Text>
-          <Text style={styles.titleText} onPress={this.handleNumAdd}>+</Text>
-          <Text style={styles.titleText} onPress={this.handleNumSubtract}>-</Text>
-          <Text onPress={this.handleAddToCart}>加入购物车</Text>
+          <TouchableOpacity>
+            <Text style={styles.titleText} onPress={this.handleNumAdd}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.titleText} onPress={this.handleNumSubtract}>-</Text>
+          </TouchableOpacity>
+          {addCart}
         </View>
         <View>
           <Text>{count ? '有货' : '无货'}</Text>
@@ -67,6 +72,9 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  disable: {
+    color: '#ccc'
   }
 })
 ;
