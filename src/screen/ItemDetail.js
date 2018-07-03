@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Platform, StyleSheet, Text, View, Button, Image, TouchableOpacity, Dimensions
+  Platform, StyleSheet, Text, View, Button, Image, TouchableOpacity, Dimensions, Animated
 } from 'react-native';
 import FitImage from 'react-native-fit-image';
 import { inject, observer } from 'mobx-react/native';
@@ -15,9 +15,20 @@ export default class ItemDetail extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleNumAdd = this.handleNumAdd.bind(this);
     this.handleNumSubtract = this.handleNumSubtract.bind(this);
-    this.state = {num: 0};
+    this.state = {
+      num: 1,
+      scale: new Animated.Value(1)
+    };
   }
   handleAddToCart () {
+    this.state.scale.setValue(1.5);
+    Animated.spring(
+      this.state.scale,
+      {
+        toValue: 1,
+        friction: 1
+      }
+    ).start();
     const {id} = this.props.navigation.state.params;
     this.props.cartStore.addFruit({
       id, count: this.state.num
@@ -38,8 +49,8 @@ export default class ItemDetail extends React.Component {
     const addCart = (() => {
       if (this.state.num === 0) { return <Text style={[styles.disable]}>加入购物车</Text>; } else {
         return (
-          <TouchableOpacity>
-            <Text style={styles.text} onPress={this.handleAddToCart}>加入购物车</Text>
+          <TouchableOpacity onPress={this.handleAddToCart}>
+            <Text style={styles.text} >加入购物车</Text>
           </TouchableOpacity>
         );
       }
@@ -71,12 +82,14 @@ export default class ItemDetail extends React.Component {
             <Text>￥{price}/500g</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.cartImageWrapper} onPress={() => this.props.navigation.navigate('CartModel')}>
-          <Image style={styles.cartImage} source={existCartImg} />
-          <View style={styles.textIcon}>
-            <Text style={styles.textIconInner}>{this.props.cartStore.fruits.length}</Text>
-          </View>
-        </TouchableOpacity>
+        <Animated.View style={[styles.cartImageWrapper, {transform: [{scale: this.state.scale}]}]}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('CartModel')}>
+            <Image style={[styles.cartImage]} source={existCartImg} />
+            <View style={styles.textIcon}>
+              <Text style={styles.textIconInner}>{this.props.cartStore.fruits.length}</Text>
+            </View>
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     );
   }
@@ -142,14 +155,17 @@ const styles = StyleSheet.create({
   },
   textIcon: {
     position: 'absolute',
-    right: 12,
-    top: 20,
-    borderRadius: 10,
-    width: 20,
-    height: 20
+    left: -14,
+    top: -8,
+    borderRadius: 20,
+    width: 40,
+    height: 40,
+    backgroundColor: '#ab956e',
+    alignItems: 'center',
+    justifyContent: 'center'
+
   },
   textIconInner: {
-    color: 'green'
   }
 })
 ;

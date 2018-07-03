@@ -17,6 +17,11 @@ client
         id
         price
         name
+        count
+        image{
+          id
+          url
+        }
       }
     }
     `
