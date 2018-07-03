@@ -28,7 +28,7 @@ export default class CartScreen extends React.Component {
         {({loading, error, data}) => {
           if (loading) return <Text>loading</Text>;
           if (error) return <Text>error: {error.message}</Text>;
-          return <Cart fruits={data.fruits} />;
+          return <Cart navigation={this.props.navigation} fruits={data.fruits} />;
         }}
       </Query>
     );

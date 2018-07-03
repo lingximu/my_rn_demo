@@ -84,7 +84,11 @@ export default class Cart extends React.Component {
     const {fruits: allFruits, cartStore: {fruits: cartFruits}} = this.props;
     let items;
     if (cartFruits.length === 0) {
-      items = <Text style={styles.empty}>购物车为空！赶快去添加商品吧！</Text>;
+      items = (
+        <View style={styles.empty}>
+          <Text>购物车为空！赶快去<Text style={styles.goHome} onPress={() => this.props.navigation.navigate('Home')}>添加商品</Text>吧！</Text>
+        </View>
+      );
     } else {
       items = cartFruits.map(({id, count, selected}) => {
         const f = allFruits.find(f => f.id === id);
@@ -109,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   items: {
-
+    flex: 1
   },
   bottom: {
     alignSelf: 'flex-end'
@@ -151,7 +155,11 @@ const styles = StyleSheet.create({
     paddingRight: 5
   },
   empty: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  goHome: {
+    color: 'green'
   }
 });

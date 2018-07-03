@@ -59,7 +59,8 @@ export default class CartStore {
 
     @computed get totalMoney () {
       let total = 0;
-      this.fruits.forEach(({id, count}) => {
+      this.fruits.forEach(({id, count, selected}) => {
+        if (!selected) { return; }
         const {price} = manifestFruits.find(mf => mf.id === id);
         total += price * count;
       });
