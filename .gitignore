@@ -1,5 +1,6 @@
 
 lxm-key.keystore
+lxm-key*.keystore
 __*
 
 # Created by https://www.gitignore.io/api/node,code,macos,reactnative
