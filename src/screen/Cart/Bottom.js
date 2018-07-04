@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   radio: {
     marginLeft: 10,
-    width: 40,
+    width: 80,
     flexDirection: 'row'
   },
   text: {

@@ -155,11 +155,11 @@ const styles = StyleSheet.create({
   },
   textIcon: {
     position: 'absolute',
-    left: -14,
-    top: -8,
+    left: 1,
+    top: 5,
     borderRadius: 20,
-    width: 40,
-    height: 40,
+    width: 20,
+    height: 20,
     backgroundColor: '#ab956e',
     alignItems: 'center',
     justifyContent: 'center'

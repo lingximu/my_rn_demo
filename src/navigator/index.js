@@ -33,8 +33,8 @@ const Tab = createBottomTabNavigator({
           <TabBarItem
             tintColor={tintColor}
             focused={focused}
-            selectedImage='http://img.lingximu.com/rn/categorySelect.png'
-            normalImage='http://img.lingximu.com/rn/category.png'
+            selectedImage='http://img.lingximu.com/rn2/categorySelect.png'
+            normalImage='http://img.lingximu.com/rn2/category.png'
           />
         )
       }
@@ -49,8 +49,8 @@ const Tab = createBottomTabNavigator({
           <TabBarItem
             tintColor={tintColor}
             focused={focused}
-            selectedImage='http://img.lingximu.com/rn/cartSelect.png'
-            normalImage='http://img.lingximu.com/rn/cart.png'
+            selectedImage='http://img.lingximu.com/rn/cart11.png'
+            normalImage='http://img.lingximu.com/rn/cart12.png'
           />
         )
       }
@@ -80,16 +80,27 @@ const Tab = createBottomTabNavigator({
   initialRouteName: 'Home'
 });
 
-export default createStackNavigator({
-  Tab: {screen: Tab},
+const DefaultStack = createStackNavigator({
+  Tab: {
+    screen: Tab,
+    navigationOptions: () => ({
+      header: null
+    })
+  },
   ItemDetail: {
     screen: ItemDetailScreen,
     navigationOptions: () => ({
-      title: `商品信息`,
-      headerBackTitle: null
+      title: `商品信息`
     })
   },
-  CartModel: {screen: CartScreen},
+  CartModel: {
+    screen: CartScreen,
+    navigationOptions: () => {
+      return {
+        title: '购物车'
+      };
+    }
+  },
   OrderScreen: {screen: ModalScreen}
 },
 {
@@ -101,3 +112,5 @@ export default createStackNavigator({
   },
   mode: 'card'
 });
+
+export default DefaultStack;
