@@ -9,35 +9,37 @@ import FruitItems from '../../compose/FruitItems';
 const ScrollableTabView = require('react-native-scrollable-tab-view');
 import Title from '../../component/Title';
 import theme from '../../config/theme';
+
+const GET_CATEGORIES = gql`
+{
+  categories{
+    id
+    name
+    fruits{
+      id
+      name
+      price
+      count
+      image{
+        url
+      }
+    }
+  }
+}
+`;
 export default class CategoryScreen extends React.Component {
   render () {
     return (
       <Query
-        query={gql`
-          {
-            categories{
-              id
-              name
-              fruits{
-                id
-                name
-                price
-                count
-                image{
-                  url
-                }
-              }
-            }
-          }
-        `}
+        query={GET_CATEGORIES}
       >
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch, networkStatus, updateQuery }) => {
           if (loading) return <Text>Loading...</Text>;
-          if (error) return <Text>Error :(error.message)</Text>;
+          if (error) return <Text>Error :{error.message}</Text>;
           const items = data.categories.map(({ name, id, fruits }) => (
             <View key={id} tabLabel={name} style={{flex: 1}}>
               <Title text={'精品' + name} />
-              <FruitItems items={fruits} navigation={this.props.navigation} />
+              <FruitItems onRefresh={refetch} refreshing={networkStatus === 4} items={fruits} navigation={this.props.navigation} />
             </View>
           ));
           return <ScrollableTabView style={styles.container}

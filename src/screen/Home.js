@@ -26,7 +26,7 @@ export default class HomeScreen extends Component {
           }
         `}
       >
-        {({ loading, error, data: {fruits} }) => {
+        {({ loading, error, data: {fruits}, refetch, networkStatus }) => {
           if (loading) return <Text>Loading...</Text>;
           if (error) return <Text>Error :(error.message)</Text>;
 
@@ -39,7 +39,7 @@ export default class HomeScreen extends Component {
           return <View style={styles.container}>
             <FruitsSwiper navigation={this.props.navigation} images={fruitImages.slice(0, 4)} />
             <Title text='精品水果' />
-            <FruitItems items={fruits} navigation={this.props.navigation} />
+            <FruitItems onRefresh={refetch} refreshing={networkStatus === 4} items={fruits} navigation={this.props.navigation} />
           </View>;
         }}
       </Query>

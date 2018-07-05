@@ -17,7 +17,7 @@ const FruitTwoItems = ({twoItems = [], navigation}) => {
   </View>;
 };
 
-const FruitItems = ({items = [], navigation}) => {
+const FruitItems = ({items = [], navigation, onRefresh = Function.prototype, refreshing = false}) => {
   const twoItemArr = [];
   let two = [];
   items.forEach((item, index) => {
@@ -34,6 +34,8 @@ const FruitItems = ({items = [], navigation}) => {
   return <View style={styles.box}>
     {/* <Title text='精品瓜果' /> */}
     <FlatList
+      onRefresh={onRefresh}
+      refreshing={refreshing}
       data={twoItemArr}
       renderItem={({item: two}) => {
         return <FruitTwoItems twoItems={two} navigation={navigation} />;

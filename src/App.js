@@ -21,9 +21,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'VirtualizedList: missing keys for items']);
 
 onError(error => {
-  console.error(error);
+  console.error('mobx error:', error);
 });
-
+console.log('config.graphqlEndpoint', config.graphqlEndpoint);
 const client = new ApolloClient({
   uri: config.graphqlEndpoint
 });
