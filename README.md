@@ -18,7 +18,7 @@ react-native run-ios
 Screenshot
 ---
 
-<img src="http://img-mk.lingximu.com/da81e3c568529128a49b8fdc99fdf5eb.gif" width="300" alt="薛大人的水果铺"/>
+<img src="./fruits-screenshot.gif" width="300" alt="薛大人的水果铺"/>
 
 
 Download App
