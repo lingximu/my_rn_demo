@@ -1,6 +1,6 @@
 my-rn-demo
 ---
-> 一个练习的作品，前端用 react-native、后端用 nodejs、数据库用 mysql、接口用 graphql 的形式。
+> 一个练习的作品，前端用 react-native / mbox 、后端用 koajs、数据库用 mysql、接口用 graphql。
 
 Usage
 ---
